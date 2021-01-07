@@ -34,7 +34,7 @@ const Header = (props: Props) => {
     <HeaderComponents>
       <HeaderContent>
         <Profile>
-          {props.token && (
+          {props.token && props.login && (
             <Button onClick={logOut} className={classes.custom}>
               {props.login}
               <ExitToAppIcon fontSize="small" />
@@ -57,6 +57,8 @@ const HeaderComponents = styled.div`
 const HeaderContent = styled.div`
   width: 70%;
   color: white;
+  display: flex;
+  align-items: center;
 `;
 
 const Profile = styled.div`

@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 import { checkToken } from "api/helpFunction";
 import { withRouter } from "react-router-dom";
 import Header from "components/Header";
+import Menu from "components/Menu";
 
 interface Props {
   history: any;
@@ -23,9 +24,7 @@ const Main = (props: Props) => {
   return (
     <div>
       <Header />
-      <Button onClick={() => console.log(1)} variant="contained">
-        ok
-      </Button>
+      <Menu />
     </div>
   );
 };
