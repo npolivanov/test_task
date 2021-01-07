@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import { actions as actionsModal } from "reducer/modal";
+import { PropsState } from "api/consts";
 
 interface Props {
   modalText: String;
@@ -22,7 +23,7 @@ function Page(props: Props) {
 
 const Div = styled.div``;
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: PropsState) => {
   return {
     modalText: state.modal.modalText,
   };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "components/Header";
 import Forms from "components/Forms";
 import { withRouter } from "react-router";
@@ -7,10 +7,15 @@ import { uid } from "rand-token";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { tokenLength } from "api/consts";
-import history from "api/history";
+import { checkToken } from "api/helpFunction";
+import { actions as actionsProfile } from "reducer/profile";
+import { connect } from "react-redux";
+import { PropsState } from "api/consts";
 
 interface Props {
   history: any;
+  login: String;
+  setLogin: (login: String) => any;
 }
 
 const Authorization = (props: Props) => {
@@ -20,6 +25,17 @@ const Authorization = (props: Props) => {
     login: false,
     password: false,
   });
+
+  useEffect(() => {
+    /*
+      проверяем наличие токена, т.к. нет сервера, просто смотрим его существование
+    */
+    let isToken = checkToken(localStorage.getItem("token"));
+    if (isToken === true) {
+      props.history.push("/");
+    }
+  }, []);
+
   const notify = () =>
     toast.error("Incorrect login or password", {
       position: "bottom-right",
@@ -33,6 +49,7 @@ const Authorization = (props: Props) => {
   const logIn = () => {
     if (auth.login === login && auth.password === password) {
       localStorage.setItem("token", uid(tokenLength));
+      props.setLogin(login);
       props.history.push("/");
     }
     let errorsObject = { ...errors };
@@ -71,4 +88,14 @@ const Authorization = (props: Props) => {
   );
 };
 
-export default withRouter(Authorization);
+const mapStateToProps = (state: PropsState) => {
+  return {
+    login: state.profile.login,
+  };
+};
+
+const action = {
+  setLogin: actionsProfile.setLogin,
+};
+
+export default withRouter(connect(mapStateToProps, action)(Authorization));

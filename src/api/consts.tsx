@@ -11,3 +11,17 @@ export const auth = {
 
 // длина токена для его валидации
 export const tokenLength = 25;
+
+// тип для reducers
+interface PropsProfile {
+  login: String;
+}
+
+interface PropsModule {
+  modalText: String;
+}
+
+export interface PropsState {
+  profile: PropsProfile;
+  modal: PropsModule;
+}

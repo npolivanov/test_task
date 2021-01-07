@@ -4,7 +4,7 @@ interface Action {
 }
 
 const initialState = {
-  modalText: "ok",
+  modalText: "",
 };
 
 export const types = {
@@ -27,10 +27,12 @@ const reducer = (state = initialState, { type, payload }: Action) => {
   switch (type) {
     case types.SHOW_MODAL:
       return {
+        ...state,
         modalText: payload,
       };
     case types.HIDE_MODAL:
       return {
+        ...state,
         modalText: "",
       };
     default:
