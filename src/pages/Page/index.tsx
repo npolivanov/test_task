@@ -13,9 +13,9 @@ function Page(props: Props) {
   const click = () => {};
   return (
     <Div>
-      <Button onClick={click} variant="contained">
+      {/* <Button onClick={click} variant="contained">
         no
-      </Button>
+      </Button> */}
     </Div>
   );
 }

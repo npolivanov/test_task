@@ -1,1 +1,2 @@
 declare module "react-toastify";
+declare module "rand-token";
