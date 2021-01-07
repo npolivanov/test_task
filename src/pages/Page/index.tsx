@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import { actions as actionsModal } from "reducer/modal";
 import { PropsState } from "api/consts";
@@ -11,7 +10,6 @@ interface Props {
 }
 
 function Page(props: Props) {
-  const click = () => {};
   return (
     <Div>
       {/* <Button onClick={click} variant="contained">

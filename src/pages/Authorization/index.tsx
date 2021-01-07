@@ -16,6 +16,7 @@ interface Props {
   history: any;
   login: String;
   setLogin: (login: String) => any;
+  setToken: (token: String) => any;
 }
 
 const Authorization = (props: Props) => {
@@ -48,8 +49,11 @@ const Authorization = (props: Props) => {
 
   const logIn = () => {
     if (auth.login === login && auth.password === password) {
-      localStorage.setItem("token", uid(tokenLength));
+      const token = uid(tokenLength);
+      localStorage.setItem("login", login);
+      localStorage.setItem("token", token);
       props.setLogin(login);
+      props.setToken(token);
       props.history.push("/");
     }
     let errorsObject = { ...errors };
@@ -96,6 +100,7 @@ const mapStateToProps = (state: PropsState) => {
 
 const action = {
   setLogin: actionsProfile.setLogin,
+  setToken: actionsProfile.setToken,
 };
 
 export default withRouter(connect(mapStateToProps, action)(Authorization));

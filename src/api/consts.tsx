@@ -15,6 +15,7 @@ export const tokenLength = 25;
 // тип для reducers
 interface PropsProfile {
   login: String;
+  token: String;
 }
 
 interface PropsModule {
