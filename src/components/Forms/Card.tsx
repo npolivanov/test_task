@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { media } from "api/consts";
 
 interface Props {
   children: React.ReactNode;
@@ -29,7 +30,7 @@ const Wrapper = styled.div`
   background-color: #fff;
   box-shadow: 0px 10px 15px -14px #5e5959;
   position: relative;
-  @media only screen and (max-width: 500px) {
+  @media only screen and ${media.CardForm} {
     margin-top: 0vh;
     box-shadow: none;
     bottom: 0px;

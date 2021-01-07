@@ -4,11 +4,19 @@ import Card from "./Card";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import { uid } from "rand-token";
+
+interface PropsError {
+  login: boolean;
+  password: boolean;
+}
 
 interface Props {
   onLogin: (value: React.ChangeEvent<HTMLInputElement>) => void;
   onPassword: (value: React.ChangeEvent<HTMLInputElement>) => void;
+  onSend: () => void;
+  login: String;
+  password: String;
+  errors: PropsError;
 }
 
 const Forms = (props: Props) => {
@@ -17,18 +25,41 @@ const Forms = (props: Props) => {
       <Card title="Авторизация">
         <Form>
           <InputBlock>
-            <TextField onChange={props.onLogin} id="login" label="Login" />
+            <TextField
+              value={props.login}
+              onChange={props.onLogin}
+              id="login"
+              label="Login"
+              error={props.errors.login}
+              helperText={props.errors.login && "Incorrect login"}
+              onKeyPress={(e) => {
+                if (e.code === "Enter") {
+                  props.onSend();
+                }
+              }}
+            />
           </InputBlock>
           <InputBlock>
             <TextField
+              value={props.password}
               onChange={props.onPassword}
               id="password"
               label="Password"
               type="password"
+              error={props.errors.password}
+              helperText={props.errors.password && "Incorrect password"}
+              onKeyPress={(e) => {
+                if (e.code === "Enter") {
+                  props.onSend();
+                }
+              }}
             />
           </InputBlock>
           <ButtonBlock>
-            <Button variant="contained" color="secondary">
+            <Button
+              onClick={props.onSend}
+              variant="contained"
+              color="secondary">
               Войти <ExitToAppIcon fontSize="small" />
             </Button>
           </ButtonBlock>
