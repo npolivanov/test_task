@@ -1,34 +1,19 @@
 import React, { useEffect } from "react";
-import { Route, Switch, Redirect, withRouter } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import Main from "pages/Main";
 import Page from "pages/Page";
 import Authorization from "pages/Authorization";
-import { checkToken } from "api/helpFunction";
+import history from "api/history";
+
 import "./index.css";
 
-interface Props {
-  history: any;
-}
-
-function App(props: Props) {
-  // useEffect(() => {
-  //   /*
-  //     проверяем наличие токена, т.к. нет сервера, просто смотрим его существование
-  //   */
-  //   let isToken = checkToken(localStorage.getItem("token"));
-  //   if (isToken === true) {
-  //     props.history.push("/");
-  //   } else {
-  //     props.history.push("/auth");
-  //   }
-  // }, []);
-
+function App() {
   return (
     <Switch>
-      <Route path="/auth" component={Authorization} />
-      <Route path="/" component={Main} />
+      <Route history={history} path="/auth" component={Authorization} />
+      <Route history={history} path="/" component={Main} />
     </Switch>
   );
 }
 
-export default withRouter(App);
+export default App;

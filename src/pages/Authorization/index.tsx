@@ -7,6 +7,7 @@ import { uid } from "rand-token";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { tokenLength } from "api/consts";
+import history from "api/history";
 
 interface Props {
   history: any;
