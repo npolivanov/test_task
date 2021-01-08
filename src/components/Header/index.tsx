@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { PropsState } from "api/consts";
@@ -7,7 +7,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { actions as actionsProfile } from "reducer/profile";
 import { withRouter } from "react-router-dom";
-
+import DropMenu from "components/DropMenu";
+import Badge from "@material-ui/core/Badge";
+import NotificationsIcon from "@material-ui/icons/Notifications";
 interface Props {
   login?: String;
   token: String;
@@ -23,7 +25,34 @@ const useStyles = makeStyles({
 });
 
 const Header = (props: Props) => {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const links = [
+    {
+      title: "add",
+      link: "/",
+    },
+    {
+      title: "user",
+      link: "/user",
+    },
+    {
+      title: "view",
+      link: "/view",
+    },
+  ];
+
+  const handleClick = (event: any) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   const classes = useStyles();
+
   const logOut = () => {
     localStorage.setItem("login", "");
     localStorage.setItem("token", "");
@@ -41,6 +70,17 @@ const Header = (props: Props) => {
             </Button>
           )}
         </Profile>
+        <DropMenu
+          handleClick={handleClick}
+          handleClose={handleClose}
+          links={links}
+          anchorEl={anchorEl}
+          open={open}
+          location={123}>
+          <Badge badgeContent={4} color="secondary">
+            <NotificationsIcon style={{ color: "#fff" }} />
+          </Badge>
+        </DropMenu>
       </HeaderContent>
     </HeaderComponents>
   );
@@ -58,6 +98,7 @@ const HeaderContent = styled.div`
   width: 70%;
   color: white;
   display: flex;
+  justify-content: space-between;
   align-items: center;
 `;
 

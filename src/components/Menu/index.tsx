@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 import Typography from "@material-ui/core/Typography";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Item from "./Item";
+import DropMenu from "components/DropMenu";
+import { media } from "api/consts";
 
 interface Props {
   history: any;
   location: any;
 }
 
-const Menu = (props: Props) => {
+const MenuComponent = (props: Props) => {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+
   const links = [
     {
       title: "add",
@@ -24,8 +30,28 @@ const Menu = (props: Props) => {
       link: "/view",
     },
   ];
+
+  const handleClick = (event: any) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <Wrapper>
+      <MobileComponents>
+        <DropMenu
+          handleClick={handleClick}
+          handleClose={handleClose}
+          links={links}
+          anchorEl={anchorEl}
+          open={open}
+          location={props.location}>
+          <MoreVertIcon />
+        </DropMenu>
+      </MobileComponents>
       <Nav>
         <Typography variant="h4" component="h2">
           Add user
@@ -59,10 +85,25 @@ const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media only screen and ${media.Menu} {
+    display: none;
+  }
+`;
+
+const MobileComponents = styled.div`
+  width: 70%;
+  display: flex;
+  justify-content: flex-start;
+  @media only screen and ${media.Menu} {
+    display: flex;
+  }
+  @media only screen and ${media.MenuModile} {
+    display: none;
+  }
 `;
 
 const Items = styled.div`
   display: flex;
 `;
 
-export default withRouter(Menu);
+export default withRouter(MenuComponent);

@@ -1,6 +1,8 @@
 /// media query
 export const media = {
   CardForm: `(max-width: 500px)`,
+  Menu: `(max-width: 650px)`,
+  MenuModile: `(min-width: 650px)`,
 };
 
 // login and password
