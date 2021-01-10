@@ -29,7 +29,7 @@ const reducer = (state = initialState, { type, payload }: Action) => {
   switch (type) {
     case types.SET_USER:
       let newState = { ...state };
-      newState.users.push(payload);
+      newState.users = [...newState.users, payload];
       return {
         ...newState,
       };
