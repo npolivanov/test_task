@@ -20,13 +20,13 @@ const Item = (props: Props) => {
 };
 
 const Wrapper: any = styled(Link)`
-  width: 50px;
+  width: 80px;
 
   height: 6vh;
   display: flex;
   margin-left: 30px;
   align-items: "center";
-
+  text-align: center;
   border-bottom: ${(props: any) =>
     props.active ? "3px solid #ff4976" : "none"};
   box-shadow: ${(props: any) =>
@@ -36,6 +36,8 @@ const Wrapper: any = styled(Link)`
 `;
 
 const Title: any = styled.span`
+  width: 100%;
+  text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;

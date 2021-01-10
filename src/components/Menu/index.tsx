@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Item from "./Item";
 import DropMenu from "components/DropMenu";
-import { media } from "api/consts";
+import { WIDTH_CONTENT, media, links } from "api/consts";
 
 interface Props {
   history: any;
@@ -15,21 +15,6 @@ interface Props {
 const MenuComponent = (props: Props) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-
-  const links = [
-    {
-      title: "add",
-      link: "/",
-    },
-    {
-      title: "user",
-      link: "/user",
-    },
-    {
-      title: "view",
-      link: "/view",
-    },
-  ];
 
   const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
@@ -81,7 +66,7 @@ const Wrapper = styled.div`
 `;
 
 const Nav = styled.nav`
-  width: 70%;
+  width: ${WIDTH_CONTENT};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -91,7 +76,7 @@ const Nav = styled.nav`
 `;
 
 const MobileComponents = styled.div`
-  width: 70%;
+  width: ${WIDTH_CONTENT};
   display: flex;
   justify-content: flex-start;
   @media only screen and ${media.Menu} {

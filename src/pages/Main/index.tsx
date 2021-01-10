@@ -5,6 +5,7 @@ import { checkToken } from "api/helpFunction";
 import { withRouter } from "react-router-dom";
 import Header from "components/Header";
 import MenuComponent from "components/Menu";
+import AddUser from "components/AddUser";
 
 interface Props {
   history: any;
@@ -25,6 +26,7 @@ const Main = (props: Props) => {
     <div>
       <Header />
       <MenuComponent />
+      <AddUser />
     </div>
   );
 };
