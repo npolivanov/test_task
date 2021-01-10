@@ -1,25 +1,11 @@
-interface PropsUsers {
-  name: String;
-  lastname: String;
-  aboutyou: String;
-  date: Date;
-  gender: String;
-  city: String;
-}
+import { PropsUsers } from "api/consts";
 
 interface Action {
   type: String;
   payload: PropsUsers | number;
 }
 
-// id: 0,
-//   name: "",
-//   lastname: "",
-//   aboutyou: "",
-//   date: new Date("2000-05-02"),
-//   gender: "",
-//   city: ""
-const initialState = {
+const initialState: any = {
   users: [],
 };
 
@@ -42,12 +28,10 @@ export const actions = {
 const reducer = (state = initialState, { type, payload }: Action) => {
   switch (type) {
     case types.SET_USER:
+      let newState = { ...state };
+      newState.users.push(payload);
       return {
-        ...state,
-        users: {
-          ...state,
-          users: [payload, ...state.users],
-        },
+        ...newState,
       };
     // case types.DELETE_USER:
     //   let newState = {...state};

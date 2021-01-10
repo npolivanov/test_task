@@ -89,9 +89,8 @@ const Header = (props: Props) => {
 const HeaderComponents = styled.div`
   background-color: #2a3244;
   width: 100%;
+  margin-top: 0px;
   height: 6vh;
-  display: flex;
-  justify-content: center;
 `;
 
 const HeaderContent = styled.div`

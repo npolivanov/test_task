@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
-import styled from "styled-components";
-import Button from "@material-ui/core/Button";
 import { checkToken } from "api/helpFunction";
 import { withRouter } from "react-router-dom";
 import Header from "components/Header";
 import MenuComponent from "components/Menu";
 import AddUser from "components/AddUser";
+import Table from "components/Table";
 
 interface Props {
   history: any;
@@ -27,6 +26,7 @@ const Main = (props: Props) => {
       <Header />
       <MenuComponent />
       <AddUser />
+      <Table />
     </div>
   );
 };

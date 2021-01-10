@@ -4,6 +4,7 @@ export const media = {
   Menu: `(max-width: 700px)`,
   MenuModile: `(min-width: 700px)`,
   FormGroup: `(max-width: 1000px)`,
+  AddUser: `(max-width: 740px)`,
 };
 
 // login and password
@@ -25,18 +26,23 @@ interface PropsModule {
   modalText: String;
 }
 
-interface PropsUsers {
+export interface PropsUsers {
   name: String;
   lastname: String;
-  aboutyou: String;
-  date: Date;
+  aboutyou: string | number | readonly string[] | undefined;
+  date: Date | null;
   gender: String;
   city: String;
+}
+
+interface TypeUsers {
+  users: Array<PropsUsers>;
 }
 
 export interface PropsState {
   profile: PropsProfile;
   modal: PropsModule;
+  users: TypeUsers;
 }
 
 export const WIDTH_CONTENT = "70%";

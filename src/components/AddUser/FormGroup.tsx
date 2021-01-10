@@ -13,21 +13,33 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
+import Button from "@material-ui/core/Button";
 import { media } from "api/consts";
 
-const FormGroup = () => {
-  const [selectedDate, setSelectedDate] = React.useState<Date | null>(
-    new Date("2000-05-02")
-  );
-  const [value, setValue] = React.useState("male");
+interface PropsErrors {
+  name: boolean;
+  lastname: boolean;
+  city: boolean;
+}
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue((event.target as HTMLInputElement).value);
-  };
+interface Props {
+  name: String;
+  setName: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  lastname: String;
+  setLastname: (lastname: React.ChangeEvent<HTMLInputElement>) => void;
+  gender: String;
+  handleChangeGender: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  selectedDate: Date | null;
+  handleDateChange: (selectedDate: Date | null) => void;
+  city: String;
+  setCity: (city: React.ChangeEvent<HTMLInputElement>) => void;
+  aboutyou: string | number | readonly string[] | undefined;
+  onSetAboutyou: (aboutyou: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  errors: PropsErrors;
+  addUser: () => void;
+}
 
-  const handleDateChange = (date: Date | null) => {
-    setSelectedDate(date);
-  };
+const FormGroup = (props: Props) => {
   return (
     <Form>
       <Item>
@@ -36,7 +48,9 @@ const FormGroup = () => {
           required
           variant="outlined"
           label="Name"
-          defaultValue=""
+          value={props.name}
+          onChange={props.setName}
+          error={props.errors.name}
         />
 
         <TextField
@@ -44,13 +58,17 @@ const FormGroup = () => {
           required
           variant="outlined"
           label="Lastname"
-          defaultValue=""
+          value={props.lastname}
+          onChange={props.setLastname}
+          error={props.errors.lastname}
         />
 
         <TextareaAutosize
           rowsMin={3}
           aria-label="empty textarea"
           placeholder="About you"
+          value={props.aboutyou}
+          onChange={props.onSetAboutyou}
         />
       </Item>
       <Item>
@@ -61,8 +79,8 @@ const FormGroup = () => {
             label="Date of Birth"
             inputVariant="outlined"
             format="dd/MM/yyyy"
-            value={selectedDate}
-            onChange={handleDateChange}
+            value={props.selectedDate}
+            onChange={props.handleDateChange}
             KeyboardButtonProps={{
               "aria-label": "change date",
             }}
@@ -73,8 +91,8 @@ const FormGroup = () => {
           <RadioGroup
             aria-label="gender"
             name="gender1"
-            value={value}
-            onChange={handleChange}>
+            value={props.gender}
+            onChange={props.handleChangeGender}>
             <FormControlLabel
               value="female"
               control={<Radio />}
@@ -88,8 +106,15 @@ const FormGroup = () => {
           required
           variant="outlined"
           label="City"
-          defaultValue=""
+          error={props.errors.city}
+          value={props.city}
+          onChange={props.setCity}
         />
+      </Item>
+      <Item>
+        <Button variant="contained" color="primary" onClick={props.addUser}>
+          + ADD
+        </Button>
       </Item>
     </Form>
   );

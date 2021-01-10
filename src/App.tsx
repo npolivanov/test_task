@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Main from "pages/Main";
-import Page from "pages/Page";
 import Authorization from "pages/Authorization";
 import history from "api/history";
 
