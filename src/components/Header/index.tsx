@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { PropsState } from "api/consts";
+import { PropsState, PropsUsers } from "api/consts";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
@@ -15,6 +15,7 @@ interface Props {
   token: String;
   setLogin: (login: String) => void;
   history: any;
+  users: Array<PropsUsers>;
 }
 
 const useStyles = makeStyles({
@@ -25,23 +26,21 @@ const useStyles = makeStyles({
 });
 
 const Header = (props: Props) => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [links, setSlinks] = useState<any>([]);
 
-  const links = [
-    {
-      title: "add",
-      link: "/",
-    },
-    {
-      title: "user",
-      link: "/user",
-    },
-    {
-      title: "view",
-      link: "/view",
-    },
-  ];
+  useEffect(() => {
+    let newLinks = props.users.map((item) => {
+      return {
+        link: item.id?.toString(),
+        title: `${item.name} ${item.lastname}`,
+      };
+    });
+    console.log(newLinks);
+    setSlinks(newLinks);
+  }, props.users);
+
+  const open = Boolean(anchorEl);
 
   const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
@@ -77,7 +76,7 @@ const Header = (props: Props) => {
           anchorEl={anchorEl}
           open={open}
           location={123}>
-          <Badge badgeContent={4} color="secondary">
+          <Badge badgeContent={props.users.length} color="secondary">
             <NotificationsIcon style={{ color: "#fff" }} />
           </Badge>
         </DropMenu>
@@ -91,6 +90,8 @@ const HeaderComponents = styled.div`
   width: 100%;
   margin-top: 0px;
   height: 6vh;
+  display: flex;
+  justify-content: center;
 `;
 
 const HeaderContent = styled.div`
@@ -110,6 +111,7 @@ const mapStateToProps = (state: PropsState) => {
   return {
     login: state.profile.login,
     token: state.profile.token,
+    users: state.users.users,
   };
 };
 

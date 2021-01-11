@@ -27,6 +27,7 @@ interface PropsModule {
 }
 
 export interface PropsUsers {
+  id?: number;
   name: String;
   lastname: String;
   aboutyou: string | number | readonly string[] | undefined;

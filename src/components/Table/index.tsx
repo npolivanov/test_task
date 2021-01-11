@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
@@ -7,18 +7,43 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import IconButton from "@material-ui/core/IconButton";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-import { WIDTH_CONTENT, PropsState, PropsUsers } from "api/consts";
+import { WIDTH_CONTENT, PropsState, PropsUsers, media } from "api/consts";
 import { connect } from "react-redux";
 import { actions as actionsUsers } from "reducer/users";
-
+import { ToastContainer, toast } from "react-toastify";
+import Row from "./Row";
 const TableComponent = (props: any) => {
-  useEffect(() => {
-    console.log(1);
-  }, [props.users]);
-  console.log(props.users);
+  const [edit, setEdit] = useState(false);
+  const notifySuccess = (message: String) =>
+    toast.success(message, {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+    });
+
+  const notifyError = (message: String) =>
+    toast.error(message, {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+    });
+
+  const deleteItem = (id: number | undefined) => {
+    props.deleteUser(id);
+    notifySuccess("Delete success");
+  };
+
+  const onEditUser = (user: PropsUsers) => {
+    props.editUser(user);
+    notifySuccess("Edit success");
+  };
+
   return (
     <Wrapper>
       <Paper>
@@ -31,38 +56,27 @@ const TableComponent = (props: any) => {
                 <TableCell align={"center"}>Фамилия</TableCell>
                 <TableCell align={"center"}>О себе</TableCell>
                 <TableCell align={"center"}>Дата рождения</TableCell>
-                <TableCell align={"center"}>Пол</TableCell>
+                <TableCell align={"center"}>пол</TableCell>
                 <TableCell align={"center"}>город</TableCell>
                 <TableCell align={"center"}></TableCell>
                 <TableCell align={"center"}></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {props.users.map((item: any, i: number) => (
-                <TableRow hover role="checkbox" key={i} tabIndex={-1}>
-                  <TableCell align={"center"}>1</TableCell>
-                  <TableCell align={"center"}>1</TableCell>
-                  <TableCell align={"center"}>1</TableCell>
-                  <TableCell align={"center"}>1</TableCell>
-                  <TableCell align={"center"}>1</TableCell>
-                  <TableCell align={"center"}>1</TableCell>
-                  <TableCell align={"center"}>1</TableCell>
-                  <TableCell align={"center"}>
-                    <IconButton color="primary" component="span">
-                      <EditIcon fontSize={"small"} />
-                    </IconButton>
-                  </TableCell>
-                  <TableCell align={"center"}>
-                    <IconButton color="primary" component="span">
-                      <DeleteForeverIcon fontSize={"small"} />
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
+              {props.users.map((item: PropsUsers, i: number) => (
+                <Row
+                  onEditUser={onEditUser}
+                  deleteItem={deleteItem}
+                  onError={() => notifyError("Incorrect user")}
+                  i={i}
+                  item={item}
+                />
               ))}
             </TableBody>
           </Table>
         </TableContainer>
       </Paper>
+      <ToastContainer />
     </Wrapper>
   );
 };
@@ -70,6 +84,10 @@ const TableComponent = (props: any) => {
 const Wrapper = styled.div`
   margin: auto;
   width: ${WIDTH_CONTENT};
+  @media only screen and ${media.AddUser} {
+    width: 100%;
+    margin-top: 0px;
+  }
 `;
 
 const mapStateToProps = (state: PropsState) => {
@@ -80,5 +98,7 @@ const mapStateToProps = (state: PropsState) => {
 
 const action = {
   setUser: actionsUsers.setUser,
+  deleteUser: actionsUsers.deleteUser,
+  editUser: actionsUsers.editUser,
 };
 export default connect(mapStateToProps, action)(TableComponent);
