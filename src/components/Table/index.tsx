@@ -14,6 +14,16 @@ import { ToastContainer, toast } from "react-toastify";
 import Row from "./Row";
 const TableComponent = (props: any) => {
   const [edit, setEdit] = useState(false);
+  const [editArray, setEditArray] = useState<Array<boolean>>([]);
+
+  useEffect(() => {
+    let editArrayLocal: Array<boolean> = [];
+    props.users.forEach(() => {
+      editArrayLocal.push(false);
+    });
+    setEditArray(editArrayLocal);
+  }, [props.users]);
+
   const notifySuccess = (message: String) =>
     toast.success(message, {
       position: "bottom-right",
@@ -44,6 +54,19 @@ const TableComponent = (props: any) => {
     notifySuccess("Edit success");
   };
 
+  const open = (i: number) => {
+    let editArrayLocal: Array<boolean> = [...editArray];
+    editArrayLocal = editArrayLocal.map((val) => (val = false));
+    editArrayLocal[i] = true;
+    setEditArray(editArrayLocal);
+  };
+
+  const close = (i: number) => {
+    let editArrayLocal: Array<boolean> = [...editArray];
+    editArrayLocal[i] = false;
+    setEditArray(editArrayLocal);
+  };
+
   return (
     <Wrapper>
       <Paper>
@@ -69,7 +92,12 @@ const TableComponent = (props: any) => {
                   deleteItem={deleteItem}
                   onError={() => notifyError("Incorrect user")}
                   i={i}
+                  key={i}
                   item={item}
+                  edit={edit}
+                  editArray={editArray}
+                  open={open}
+                  close={close}
                 />
               ))}
             </TableBody>

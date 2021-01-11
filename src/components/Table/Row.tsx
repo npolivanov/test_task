@@ -25,14 +25,26 @@ interface IProps {
   deleteItem: (id: number | undefined) => void;
   onEditUser: (user: PropsUsers) => void;
   onError: () => void;
+  edit: boolean;
+  open: (i: number) => void;
+  close: (i: number) => void;
+  editArray: Array<boolean>;
 }
 interface PropsErrors {
   name: boolean;
   lastname: boolean;
   city: boolean;
 }
-const Row = ({ item, i, deleteItem, onEditUser, onError }: IProps) => {
-  const [edit, setEdit] = useState(false);
+const Row = ({
+  item,
+  i,
+  deleteItem,
+  onEditUser,
+  onError,
+  open,
+  close,
+  editArray,
+}: IProps) => {
   const [name, setName] = useState<String>("");
   const [lastname, setLastname] = useState<String>("");
   const [gender, setGender] = useState<String>("male");
@@ -59,14 +71,13 @@ const Row = ({ item, i, deleteItem, onEditUser, onError }: IProps) => {
   };
 
   useEffect(() => {
-    setEdit(false);
     setName(item.name);
     setLastname(item.lastname);
     setGender(item.gender);
     setSelectedDate(item.date);
     setCity(item.city);
     setAboutyou(item.aboutyou);
-  }, []);
+  }, [item]);
 
   const handleDateChange = (date: Date | null) => {
     setSelectedDate(date);
@@ -120,7 +131,7 @@ const Row = ({ item, i, deleteItem, onEditUser, onError }: IProps) => {
         gender: gender,
         city: city,
       });
-      setEdit(false);
+      close(i);
     } else {
       onError();
     }
@@ -128,7 +139,7 @@ const Row = ({ item, i, deleteItem, onEditUser, onError }: IProps) => {
 
   return (
     <>
-      {!edit ? (
+      {!editArray[i] ? (
         <TableRow hover role="checkbox" key={i} tabIndex={-1}>
           <TableCell align={"center"}>{i + 1}</TableCell>
           <TableCell align={"center"}>{getWord(item.name)}</TableCell>
@@ -143,7 +154,7 @@ const Row = ({ item, i, deleteItem, onEditUser, onError }: IProps) => {
             <IconButton
               color="primary"
               component="span"
-              onClick={() => setEdit(true)}>
+              onClick={() => open(i)}>
               <EditIcon fontSize={"small"} />
             </IconButton>
           </TableCell>
@@ -241,7 +252,7 @@ const Row = ({ item, i, deleteItem, onEditUser, onError }: IProps) => {
           <TableCell align={"center"}>
             <IconButton
               color="secondary"
-              onClick={() => setEdit(false)}
+              onClick={() => close(i)}
               component="span">
               <CancelIcon fontSize={"small"} />
             </IconButton>

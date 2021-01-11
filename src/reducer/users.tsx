@@ -71,7 +71,7 @@ const reducer = (state = initialState, { type, payload }: Action) => {
           user.aboutyou = payload.aboutyou;
         }
       });
-      // sessionStorage.setItem("users", JSON.stringify(newUsers));
+      sessionStorage.setItem("users", JSON.stringify(editState.users));
       return {
         ...state,
       };

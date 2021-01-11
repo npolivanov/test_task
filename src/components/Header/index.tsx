@@ -36,9 +36,8 @@ const Header = (props: Props) => {
         title: `${item.name} ${item.lastname}`,
       };
     });
-    console.log(newLinks);
     setSlinks(newLinks);
-  }, props.users);
+  }, [props.users]);
 
   const open = Boolean(anchorEl);
 
