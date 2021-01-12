@@ -35,10 +35,12 @@ const User = (props: any) => {
   useEffect(() => {
     if (props.category !== undefined) {
       let select = category[props.category];
-      setNameCategory(select.name);
-      request(select.link).then((res: any) => {
-        props.setCards(res.entries);
-      });
+      if (select !== undefined) {
+        setNameCategory(select.name);
+        request(select.link).then((res: any) => {
+          props.setCards(res.entries);
+        });
+      }
     }
   }, [props.category]);
 

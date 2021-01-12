@@ -70,7 +70,7 @@ export const links = [
 export const apiLinks = {
   url: "https://api.publicapis.org",
   Photography: "/entries?category=Photography&auth=null",
-  Books: "/entries?category=Books&auth=null",
+  Calendar: "/entries?category=Calendar&auth=null",
 };
 export const category = [
   {
@@ -78,7 +78,7 @@ export const category = [
     link: `${apiLinks.url}${apiLinks.Photography}`,
   },
   {
-    name: "Books",
-    link: `${apiLinks.url}${apiLinks.Books}`,
+    name: "Calendar",
+    link: `${apiLinks.url}${apiLinks.Calendar}`,
   },
 ];

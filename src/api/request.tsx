@@ -6,4 +6,19 @@ const request = (url: string) => {
   });
 };
 
+export const requestCors = (url: String) => {
+  return axios
+    .get(url, {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": true,
+      },
+      withCredentials: true,
+    })
+    .then((response: any) => {
+      return response.data;
+    });
+};
+
 export default request;
