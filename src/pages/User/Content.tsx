@@ -4,6 +4,8 @@ import { WIDTH_CONTENT, IPropsCards } from "api/consts";
 import CardComponent from "components/CardComponent";
 import MonochromePhotosIcon from "@material-ui/icons/MonochromePhotos";
 import DateRangeIcon from "@material-ui/icons/DateRange";
+import DuoIcon from "@material-ui/icons/Duo";
+
 interface IProps {
   cards: Array<IPropsCards>;
   category: String;
@@ -15,6 +17,8 @@ const returnIcon = (category: String) => {
       return <MonochromePhotosIcon color={"primary"} fontSize={"large"} />;
     case "Calendar":
       return <DateRangeIcon color={"primary"} fontSize={"large"} />;
+    case "Video":
+      return <DuoIcon color={"primary"} fontSize={"large"} />;
     default:
       return "";
   }

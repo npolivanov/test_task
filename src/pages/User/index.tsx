@@ -8,7 +8,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { actions as actionsCards } from "reducer/cards";
 import { actions as actionsUsers } from "reducer/users";
-import { category } from "api/consts";
+import { category, api } from "api/consts";
 // interface IProps {
 //   history: any;
 //   setCards: (cards: IPropsCards) => void;
@@ -38,7 +38,14 @@ const User = (props: any) => {
       if (select !== undefined) {
         setNameCategory(select.name);
         request(select.link).then((res: any) => {
-          props.setCards(res.entries);
+          // фильтруем и оставляем только обработанные api
+          let entriesFilter = res.entries.filter((item: any) => {
+            let findItem = api.find((value) => value === item.API);
+            if (findItem) {
+              return item;
+            }
+          });
+          props.setCards(entriesFilter);
         });
       }
     }

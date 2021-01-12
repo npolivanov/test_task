@@ -11,6 +11,11 @@ import CzechNamedaysCalendar from "./CzechNamedaysCalendar";
 import HebrewCalendar from "./HebrewCalendar";
 import LectServe from "./LectServe";
 import NamedaysCalendar from "./NamedaysCalendar";
+import Breakingbadapi from "./Breakingbadapi";
+import FinalSpace from "./FinalSpace";
+import RonSwansonQuotes from "./RonSwansonQuotes";
+import TheLordoftheRings from "./TheLordoftheRings";
+import STAPI from "./STAPI";
 
 const Result = (props: any) => {
   const returnPage = () => {
@@ -31,6 +36,16 @@ const Result = (props: any) => {
         return <LectServe />;
       case "Namedays Calendar":
         return <NamedaysCalendar />;
+      case "Breaking Bad":
+        return <Breakingbadapi />;
+      case "Final Space":
+        return <FinalSpace />;
+      case "Ron Swanson Quotes":
+        return <RonSwansonQuotes />;
+      case "STAPI":
+        return <STAPI />;
+      case "The Lord of the Rings":
+        return <TheLordoftheRings />;
       default:
         return <EmptyMessage>Не найдено</EmptyMessage>;
     }

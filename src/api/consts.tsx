@@ -67,10 +67,27 @@ export const links = [
   },
 ];
 
+export const api = [
+  "Lorem Picsum",
+  "PlaceKitten",
+  "ScreenShotLayer",
+  "Church Calendar",
+  "Czech Namedays Calendar",
+  "Hebrew Calendar",
+  "LectServe",
+  "Namedays Calendar",
+  "Breaking Bad",
+  "Final Space",
+  "Ron Swanson Quotes",
+  "STAPI",
+  "The Lord of the Rings",
+];
+
 export const apiLinks = {
   url: "https://api.publicapis.org",
   Photography: "/entries?category=Photography&auth=null",
   Calendar: "/entries?category=Calendar&auth=null",
+  Video: "/entries?category=Video",
 };
 export const category = [
   {
@@ -80,5 +97,9 @@ export const category = [
   {
     name: "Calendar",
     link: `${apiLinks.url}${apiLinks.Calendar}`,
+  },
+  {
+    name: "Video",
+    link: `${apiLinks.url}${apiLinks.Video}`,
   },
 ];
