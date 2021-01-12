@@ -32,7 +32,7 @@ const Header = (props: Props) => {
   useEffect(() => {
     let newLinks = props.users.map((item) => {
       return {
-        link: item.id?.toString(),
+        link: `/user/${item.id?.toString()}`,
         title: `${item.name} ${item.lastname}`,
       };
     });

@@ -38,9 +38,6 @@ const MenuComponent = (props: Props) => {
         </DropMenu>
       </MobileComponents>
       <Nav>
-        <Typography variant="h4" component="h2">
-          Add user
-        </Typography>
         <Items>
           {links.map((item, i) => (
             <Item

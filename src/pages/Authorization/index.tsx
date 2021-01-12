@@ -27,16 +27,6 @@ const Authorization = (props: Props) => {
     password: false,
   });
 
-  useEffect(() => {
-    /*
-      проверяем наличие токена, т.к. нет сервера, просто смотрим его существование
-    */
-    let isToken = checkToken(localStorage.getItem("token"));
-    if (isToken === true) {
-      props.history.push("/");
-    }
-  }, []);
-
   const notify = () =>
     toast.error("Incorrect login or password", {
       position: "bottom-right",

@@ -53,6 +53,7 @@ const DropMenu = (props: Props) => {
             onClick={props.handleClose}>
             <Link
               to={item.link}
+              key={i}
               style={{ textDecoration: "none", color: "#000" }}>
               {item.title}
             </Link>

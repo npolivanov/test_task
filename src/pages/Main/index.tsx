@@ -11,16 +11,6 @@ interface Props {
 }
 
 const Main = (props: Props) => {
-  useEffect(() => {
-    /*
-      проверяем наличие токена, т.к. нет сервера, просто смотрим его существование
-    */
-    let isToken = checkToken(localStorage.getItem("token"));
-    if (isToken === false) {
-      props.history.push("/auth");
-    }
-  }, []);
-
   return (
     <div>
       <Header />

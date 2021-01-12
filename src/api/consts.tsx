@@ -22,10 +22,6 @@ interface PropsProfile {
   token: String;
 }
 
-interface PropsModule {
-  modalText: String;
-}
-
 export interface PropsUsers {
   id?: number;
   name: String;
@@ -36,14 +32,28 @@ export interface PropsUsers {
   city: String;
 }
 
+export interface PropsCards {
+  API: String;
+  Auth: String;
+  Category: String;
+  Cors: String;
+  Description: String;
+  HTTPS: boolean;
+  Link: String;
+}
+
+export interface IPropsCards {
+  cards: Array<PropsCards>;
+}
+
 interface TypeUsers {
   users: Array<PropsUsers>;
 }
 
 export interface PropsState {
   profile: PropsProfile;
-  modal: PropsModule;
   users: TypeUsers;
+  cards: IPropsCards;
 }
 
 export const WIDTH_CONTENT = "70%";
@@ -54,12 +64,9 @@ export const links = [
     title: "add/edit",
     link: "/",
   },
-  {
-    title: "user",
-    link: "/user",
-  },
-  {
-    title: "view",
-    link: "/view",
-  },
 ];
+
+export const apiLinks = {
+  url: "https://api.publicapis.org",
+  Photography: "/entries?category=Photography&auth=null",
+};
