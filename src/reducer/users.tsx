@@ -14,14 +14,18 @@ const getUser = () => {
   }
 };
 
+const category = sessionStorage.getItem("category");
+
 const initialState: any = {
   users: getUser(),
+  category: category == null ? null : parseInt(category), // id категории, чтобы всегда выводить новую
 };
 
 export const types = {
   SET_USER: "SET_USER",
   DELETE_USER: "DELETE_USER",
   EDIT_USER: "EDIT_USER",
+  SELECT_CATEGORY: "SELECT_CATEGORY",
 };
 
 export const actions = {
@@ -36,6 +40,10 @@ export const actions = {
   editUser: (user: number) => ({
     type: types.EDIT_USER,
     payload: user,
+  }),
+  selectCategory: (category: number) => ({
+    type: types.SELECT_CATEGORY,
+    payload: category,
   }),
 };
 
@@ -72,9 +80,17 @@ const reducer = (state = initialState, { type, payload }: Action) => {
         }
       });
       sessionStorage.setItem("users", JSON.stringify(editState.users));
+
       return {
         ...state,
       };
+    case types.SELECT_CATEGORY:
+      sessionStorage.setItem("category", JSON.stringify(payload));
+      return {
+        ...state,
+        category: payload,
+      };
+
     default:
       return state;
   }

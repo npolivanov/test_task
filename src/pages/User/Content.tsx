@@ -2,16 +2,31 @@ import React from "react";
 import styled from "styled-components";
 import { WIDTH_CONTENT, IPropsCards } from "api/consts";
 import CardComponent from "components/CardComponent";
+import MonochromePhotosIcon from "@material-ui/icons/MonochromePhotos";
+import MenuBookIcon from "@material-ui/icons/MenuBook";
 interface IProps {
   cards: Array<IPropsCards>;
+  category: String;
 }
 
+const returnIcon = (category: String) => {
+  switch (category) {
+    case "Photo":
+      return <MonochromePhotosIcon color={"primary"} fontSize={"large"} />;
+    case "Books":
+      return <MenuBookIcon color={"primary"} fontSize={"large"} />;
+    default:
+      return "";
+  }
+};
 const Content = (props: IProps) => {
   return (
     <Wrapper>
       <WrapperCards>
         {props.cards.map((item, i) => (
-          <CardComponent card={item} key={i} />
+          <CardComponent card={item} key={i}>
+            {returnIcon(props.category)}
+          </CardComponent>
         ))}
       </WrapperCards>
     </Wrapper>

@@ -48,6 +48,7 @@ export interface IPropsCards {
 
 interface TypeUsers {
   users: Array<PropsUsers>;
+  category: number | null;
 }
 
 export interface PropsState {
@@ -69,4 +70,15 @@ export const links = [
 export const apiLinks = {
   url: "https://api.publicapis.org",
   Photography: "/entries?category=Photography&auth=null",
+  Books: "/entries?category=Books&auth=null",
 };
+export const category = [
+  {
+    name: "Photo",
+    link: `${apiLinks.url}${apiLinks.Photography}`,
+  },
+  {
+    name: "Books",
+    link: `${apiLinks.url}${apiLinks.Books}`,
+  },
+];

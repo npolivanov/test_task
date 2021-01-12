@@ -6,11 +6,12 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { PropsCards } from "api/consts";
 import styled from "styled-components";
-import MonochromePhotosIcon from "@material-ui/icons/MonochromePhotos";
+
 import { Link } from "react-router-dom";
 
 interface IProps {
   card: any;
+  children: React.ReactNode;
 }
 
 const CardComponent = (props: IProps) => {
@@ -21,7 +22,8 @@ const CardComponent = (props: IProps) => {
           <Typography color="textSecondary" gutterBottom>
             Category: {props.card.Category}
           </Typography>
-          <MonochromePhotosIcon color={"primary"} fontSize={"large"} />
+          {props.children}
+
           <Typography variant="h5" component="h2">
             {" "}
             {props.card.API}
